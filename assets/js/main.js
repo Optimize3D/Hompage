@@ -2,6 +2,8 @@ const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const year = document.querySelector("#year");
 const emailButtons = document.querySelectorAll("[data-email-button]");
+const pipelines = document.querySelectorAll("[data-pipeline]");
+const tabGroups = document.querySelectorAll("[data-tab-group]");
 
 if (year) {
   year.textContent = String(new Date().getFullYear());
@@ -20,6 +22,87 @@ if (navToggle && navLinks) {
     });
   });
 }
+
+pipelines.forEach((pipeline) => {
+  const steps = [...pipeline.querySelectorAll("[data-pipeline-step]")];
+  const title = pipeline.querySelector("[data-pipeline-visual-title]");
+  const body = pipeline.querySelector("[data-pipeline-visual-body]");
+  const output = pipeline.querySelector("[data-pipeline-visual-output]");
+
+  const activateStep = (step) => {
+    steps.forEach((item) => item.classList.toggle("is-active", item === step));
+    if (title) title.textContent = step.dataset.pipelineTitle || "";
+    if (body) body.textContent = step.dataset.pipelineBody || "";
+    if (output) output.textContent = step.dataset.pipelineOutput || "";
+  };
+
+  steps.forEach((step) => {
+    step.setAttribute("tabindex", "0");
+    step.addEventListener("click", () => activateStep(step));
+    step.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        activateStep(step);
+      }
+    });
+  });
+
+  if (steps[0]) activateStep(steps[0]);
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (visible) activateStep(visible.target);
+    }, {
+      rootMargin: "-18% 0px -42% 0px",
+      threshold: [0.25, 0.5, 0.75]
+    });
+
+    steps.forEach((step) => observer.observe(step));
+  }
+});
+
+tabGroups.forEach((group) => {
+  const buttons = [...group.querySelectorAll("[data-tab-target]")];
+  const panels = buttons
+    .map((button) => document.getElementById(button.dataset.tabTarget))
+    .filter(Boolean);
+
+  const activateTab = (button) => {
+    const target = document.getElementById(button.dataset.tabTarget);
+    if (!target) return;
+
+    buttons.forEach((item) => item.setAttribute("aria-selected", String(item === button)));
+    panels.forEach((panel) => {
+      const isActive = panel === target;
+      panel.hidden = !isActive;
+      panel.classList.toggle("is-active", isActive);
+    });
+  };
+
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => activateTab(button));
+    button.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+
+      let nextIndex = index;
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % buttons.length;
+      if (event.key === "ArrowLeft") nextIndex = (index - 1 + buttons.length) % buttons.length;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = buttons.length - 1;
+
+      buttons[nextIndex].focus();
+      activateTab(buttons[nextIndex]);
+    });
+  });
+
+  const selected = buttons.find((button) => button.getAttribute("aria-selected") === "true") || buttons[0];
+  if (selected) activateTab(selected);
+});
 
 if (emailButtons.length > 0) {
   const emailCodePoints = [111, 112, 116, 105, 109, 105, 122, 101, 51, 100, 46, 120, 121, 122, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];

@@ -15,7 +15,7 @@
   <meta property="og:url" content="https://optimize3d.github.io/Hompage/en/">
   <meta property="og:image" content="https://optimize3d.github.io/Hompage/assets/images/shipyard-pointcloud-hero.png">
   <link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/styles.css?v=20260707c">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=20260708a">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -70,24 +70,179 @@
         <div class="stack-head">
           <p class="kicker">Manufacturing Data Stack</p>
           <h2 id="stack-title">We turn scan files into manufacturing data.</h2>
+          <p>Follow how a field scan becomes inspection, reverse engineering, fabrication, and robot execution data.</p>
         </div>
-        <div class="stack-grid">
-          <article>
+        <div class="pipeline-shell" data-pipeline>
+          <div class="pipeline-steps">
+          <article data-pipeline-step data-pipeline-title="Field scan data" data-pipeline-body="Objects, coordinate systems, photos, CAD files, and inspection criteria are grouped into one project dataset." data-pipeline-output="Point cloud / CAD / Photo">
             <span>01</span>
-            <h3>Field Data Capture</h3>
+            <h3>Field Scan</h3>
             <p>Point clouds, CAD, photos, inspection criteria, and workspace constraints are organized by project.</p>
           </article>
-          <article>
+          <article data-pipeline-step data-pipeline-title="Point-cloud registration" data-pipeline-body="Large point clouds are aligned to reference coordinates and prepared at usable density and structure." data-pipeline-output="Registered point cloud">
             <span>02</span>
-            <h3>AI Analysis &amp; Spatial Reasoning</h3>
-            <p>Segmentation, feature extraction, deviation candidates, collision risks, and accessibility are computed as usable data.</p>
+            <h3>Point-cloud Processing</h3>
+            <p>Noise, coordinate systems, density, and regions of interest are organized into analysis-ready data.</p>
           </article>
-          <article>
+          <article data-pipeline-step data-pipeline-title="AI object recognition" data-pipeline-body="Blocks, stiffeners, pipes, workspaces, and jig candidates are segmented and recognized as objects." data-pipeline-output="Object labels / Segments">
             <span>03</span>
-            <h3>Inspection, Fabrication &amp; Robot Execution</h3>
-            <p>Results are delivered as inspection reports, CAD reconstruction, jig concepts, and robot simulation inputs.</p>
+            <h3>AI Object Recognition</h3>
+            <p>Structures and parts are segmented to identify defect candidates and inspection priorities.</p>
           </article>
+          <article data-pipeline-step data-pipeline-title="AI spatial reasoning" data-pipeline-body="Distances, accessibility, collision possibilities, and workable areas are computed from object relationships." data-pipeline-output="Spatial reasoning result">
+            <span>04</span>
+            <h3>AI Spatial Reasoning</h3>
+            <p>Object relationships, accessibility, collision risk, and robot workability are calculated.</p>
+          </article>
+          <article data-pipeline-step data-pipeline-title="Quality inspection report" data-pipeline-body="CAD deviations, GD&amp;T, tolerances, and release or hold evidence are organized into reports." data-pipeline-output="Deviation map / Report">
+            <span>05</span>
+            <h3>Quality Inspection</h3>
+            <p>Deviation maps, tolerances, and decision evidence become field-ready reports.</p>
+          </article>
+          <article data-pipeline-step data-pipeline-title="Execution data package" data-pipeline-body="Scan-to-CAD, 3D printed jig concepts, and robot simulation input data are connected into deliverables." data-pipeline-output="CAD / Jig / Robot data">
+            <span>06</span>
+            <h3>Reverse Engineering &amp; Execution</h3>
+            <p>CAD reconstruction, jig design, 3D printing, and robot simulation data are delivered.</p>
+          </article>
+          </div>
+          <aside class="pipeline-visual" aria-label="Pipeline status">
+            <div class="pipeline-screen">
+              <div class="screen-toolbar">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <p class="screen-kicker">ACTIVE STEP</p>
+              <h3 data-pipeline-visual-title>Field scan data</h3>
+              <p data-pipeline-visual-body>Objects, coordinate systems, photos, CAD files, and inspection criteria are grouped into one project dataset.</p>
+              <div class="scan-map" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <dl>
+                <div>
+                  <dt>Input</dt>
+                  <dd>Point cloud / CAD / Photo</dd>
+                </div>
+                <div>
+                  <dt>Output</dt>
+                  <dd data-pipeline-visual-output>Point cloud / CAD / Photo</dd>
+                </div>
+              </dl>
+            </div>
+          </aside>
         </div>
+      </div>
+    </section>
+
+    <section class="section compare-section" aria-labelledby="compare-title" data-tab-group>
+      <div class="section-head compact">
+        <p class="kicker">Data Transformation</p>
+        <h2 id="compare-title">One scan becomes multiple execution datasets.</h2>
+        <p class="lead">Switch between field capture, AI analysis, quality inspection, and execution deliverables.</p>
+      </div>
+      <div class="tab-controls" role="tablist" aria-label="Data transformation steps">
+        <button type="button" role="tab" aria-selected="true" data-tab-target="compare-scan">Field scan</button>
+        <button type="button" role="tab" aria-selected="false" data-tab-target="compare-ai">AI analysis</button>
+        <button type="button" role="tab" aria-selected="false" data-tab-target="compare-report">Quality report</button>
+        <button type="button" role="tab" aria-selected="false" data-tab-target="compare-output">Execution data</button>
+      </div>
+      <div class="compare-stage">
+        <article class="tab-panel is-active" id="compare-scan" role="tabpanel">
+          <img src="../assets/images/shipyard-pointcloud-hero.png" alt="Shipyard scan point cloud">
+          <div>
+            <p class="kicker">Capture</p>
+            <h3>Capture the site as reference data</h3>
+            <p>Ship blocks, cargo holds, molds, piping, and workspaces are grouped with point clouds, photos, and CAD references.</p>
+          </div>
+        </article>
+        <article class="tab-panel" id="compare-ai" role="tabpanel" hidden>
+          <img src="../assets/images/ai-pointcloud-recognition.png" alt="AI object recognition and spatial reasoning screen">
+          <div>
+            <p class="kicker">Analyze</p>
+            <h3>AI object recognition and spatial reasoning</h3>
+            <p>Structures and parts are segmented, then object relationships, accessibility, and collision risks are calculated.</p>
+          </div>
+        </article>
+        <article class="tab-panel" id="compare-report" role="tabpanel" hidden>
+          <img src="../assets/images/hull-deviation-real.png" alt="Deviation analysis and quality report screen">
+          <div>
+            <p class="kicker">Decide</p>
+            <h3>Deviation maps and quality decisions</h3>
+            <p>CAD deviations, tolerances, inspection priority, and release or hold evidence are organized into reports.</p>
+          </div>
+        </article>
+        <article class="tab-panel" id="compare-output" role="tabpanel" hidden>
+          <img src="../assets/images/spatial-reasoning-robot.png" alt="Robot simulation and workspace data">
+          <div>
+            <p class="kicker">Execute</p>
+            <h3>Connect to CAD, jigs, and robot data</h3>
+            <p>Scan-to-CAD, 3D printed jig concepts, workspace digital twins, and robot path review data become deliverables.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section case-section" aria-labelledby="case-title" data-tab-group>
+      <div class="section-head compact">
+        <p class="kicker">Applied Cases</p>
+        <h2 id="case-title">Representative cases</h2>
+        <p class="lead">Examples where shipyard and manufacturing scan data became inspection, recognition, and automation outputs.</p>
+      </div>
+      <div class="case-tabs" role="tablist" aria-label="Representative cases">
+        <button type="button" role="tab" aria-selected="true" data-tab-target="case-cargo">Cargo-hold spatial recognition</button>
+        <button type="button" role="tab" aria-selected="false" data-tab-target="case-lngc">LNGC object detection</button>
+        <button type="button" role="tab" aria-selected="false" data-tab-target="case-mold">FRP mold inspection</button>
+        <button type="button" role="tab" aria-selected="false" data-tab-target="case-robot">Robot workability</button>
+      </div>
+      <div class="case-panels">
+        <article class="case-panel tab-panel is-active" id="case-cargo" role="tabpanel">
+          <div>
+            <time>2025</time>
+            <h3>Deep-learning spatial recognition automation module for container ship cargo holds</h3>
+            <p>Structures and working spaces are recognized from cargo-hold point clouds, then object segmentation, spatial relationships, and inspection criteria are organized into automation-ready data.</p>
+          </div>
+          <ul>
+            <li>Input: cargo-hold 3D point clouds</li>
+            <li>Analysis: AI object recognition, spatial reasoning, accessibility</li>
+            <li>Output: inspection and work criteria data package</li>
+          </ul>
+        </article>
+        <article class="case-panel tab-panel" id="case-lngc" role="tabpanel" hidden>
+          <div>
+            <time>2020-2021</time>
+            <h3>3D point-cloud object detection for LNGC cargo holds</h3>
+            <p>Deep-learning point-cloud processing and post-processing were applied to detect and separate scaffolding systems during cargo-hold measurement.</p>
+          </div>
+          <ul>
+            <li>Input: LNGC cargo-hold scan data</li>
+            <li>Analysis: object detection, semantic segmentation, post-processing</li>
+            <li>Output: cleaned measurement target data</li>
+          </ul>
+        </article>
+        <article class="case-panel tab-panel" id="case-mold" role="tabpanel" hidden>
+          <div>
+            <time>2016-2021</time>
+            <h3>3D scanning and deviation analysis for small vessels and FRP molds</h3>
+            <p>Scan data from small vessels and production molds was compared against reference geometry to validate dimensional control and process improvement opportunities.</p>
+          </div>
+          <ul>
+            <li>Input: small vessel and FRP mold scan data</li>
+            <li>Analysis: registration, deviation map, quality criteria</li>
+            <li>Output: mold quality and improvement evidence</li>
+          </ul>
+        </article>
+        <article class="case-panel tab-panel" id="case-robot" role="tabpanel" hidden>
+          <div>
+            <time>2025-2026</time>
+            <h3>Collaborative robot welding automation and point-cloud surface extraction</h3>
+            <p>Point clouds from constrained ship-block environments are converted into robot paths, collision checks, and welding automation input data.</p>
+          </div>
+          <ul>
+            <li>Input: ship-block workspace point clouds</li>
+            <li>Analysis: surface extraction, path candidates, collision review</li>
+            <li>Output: robot simulation input data</li>
+          </ul>
+        </article>
       </div>
     </section>
 
@@ -290,6 +445,6 @@
     </div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260707b"></script>
+  <script src="../assets/js/main.js?v=20260708a"></script>
 </body>
 </html>
