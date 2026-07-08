@@ -176,7 +176,7 @@ h3,
   min-height: 640px;
   background:
     linear-gradient(90deg, rgba(16, 16, 20, .98) 0%, rgba(16, 16, 20, .86) 44%, rgba(16, 16, 20, .24) 78%, rgba(16, 16, 20, .08) 100%),
-    url("../images/research/hero-field-scan.jpg") center right / cover no-repeat;
+    url("../images/generated/hero-shipyard-pointcloud-v2.png") center right / cover no-repeat;
   color: var(--ink);
   overflow: hidden;
 }
@@ -1614,7 +1614,7 @@ h3 {
     min-height: 520px;
     background:
       linear-gradient(90deg, rgba(16, 16, 20, .98), rgba(16, 16, 20, .84)),
-      url("../images/research/hero-field-scan.jpg") center right 35% / cover no-repeat;
+      url("../images/generated/hero-shipyard-pointcloud-v2.png") center right 35% / cover no-repeat;
   }
 
   .hero-inner {
