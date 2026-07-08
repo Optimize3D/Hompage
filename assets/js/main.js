@@ -110,13 +110,32 @@ tabGroups.forEach((group) => {
 if (emailButtons.length > 0) {
   const emailCodePoints = [111, 112, 116, 105, 109, 105, 122, 101, 51, 100, 46, 120, 121, 122, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
   const emailAddress = () => String.fromCharCode(...emailCodePoints);
-  const emailBody = (locale) => {
+  const inquiryDate = () => {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).formatToParts(new Date());
+    const part = (type) => parts.find((item) => item.type === type)?.value || "";
+
+    return `${part("year")}-${part("month")}-${part("day")}`;
+  };
+  const emailSubject = (button, locale, date) => {
+    const fallback = locale.startsWith("en") ? "Optimize3D pilot inquiry" : "Optimize3D 파일럿 문의";
+    const baseSubject = button.dataset.emailSubject || fallback;
+
+    return `[${date}] ${baseSubject}`;
+  };
+  const emailBody = (locale, date) => {
     if (locale.startsWith("en")) {
       return [
         "Hello Optimize3D,",
         "",
         "I would like to discuss a pilot or technical inquiry.",
         "Please review the information below.",
+        "",
+        `Inquiry date: ${date}`,
         "",
         "1. Company / organization:",
         "2. Name / role:",
@@ -135,6 +154,8 @@ if (emailButtons.length > 0) {
       "안녕하세요, Optimize3D 파일럿/기술 상담을 문의드립니다.",
       "아래 항목 중 가능한 내용만 작성합니다.",
       "",
+      `문의일: ${date}`,
+      "",
       "1. 회사/기관:",
       "2. 성함/직책:",
       "3. 연락처:",
@@ -151,8 +172,9 @@ if (emailButtons.length > 0) {
   emailButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const locale = button.dataset.emailLocale || document.documentElement.lang || "ko";
-      const subject = encodeURIComponent(button.dataset.emailSubject || "Optimize3D 파일럿 문의");
-      const body = encodeURIComponent(emailBody(locale));
+      const date = inquiryDate();
+      const subject = encodeURIComponent(emailSubject(button, locale, date));
+      const body = encodeURIComponent(emailBody(locale, date));
       window.location.href = `mailto:${emailAddress()}?subject=${subject}&body=${body}`;
     });
   });
