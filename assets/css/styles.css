@@ -117,8 +117,10 @@ h3,
 }
 
 .brand img {
-  width: 176px;
+  width: 260px;
+  max-width: 42vw;
   height: auto;
+  display: block;
 }
 
 .nav-links {
@@ -1159,7 +1161,8 @@ h3 {
 }
 
 .site-footer img {
-  width: 150px;
+  width: 230px;
+  max-width: 100%;
 }
 
 .site-footer a {
@@ -1461,7 +1464,8 @@ h3 {
   }
 
   .brand img {
-    width: 158px;
+    width: 220px;
+    max-width: calc(100vw - 104px);
   }
 
   .nav-toggle {
