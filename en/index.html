@@ -18,7 +18,7 @@
   <meta property="og:image" content="https://optimize3d.github.io/homepage/assets/images/generated/hero-shipyard-pointcloud-v2.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../assets/brand/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../assets/css/styles.css?v=20260713d">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=20260713e">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -252,20 +252,48 @@
         <p class="kicker">Contact</p>
         <h2 id="contact-title">Tell us what data you have and what needs to be solved.</h2>
         <p>A point cloud, CAD file, photo set, inspection criterion, or field problem is enough to start defining an application scope.</p>
-        <div class="contact-field">
-          <label for="inquiry-category">Inquiry area</label>
-          <select id="inquiry-category" data-email-category-select>
-            <option value="General Technical Consultation">General technical consultation</option>
-            <option value="3D Scanning &amp; Reverse Engineering">3D scanning &amp; reverse engineering</option>
-            <option value="Spatial AI &amp; Quality Inspection">Spatial AI &amp; quality inspection</option>
-            <option value="Physical AI &amp; Robot Data">Physical AI &amp; robot data</option>
-            <option value="Industry-Academic Research">Industry-academic research</option>
-          </select>
-        </div>
-        <div class="cta-actions">
-          <button class="button primary" type="button" data-email-button data-email-locale="en">Email us</button>
-          <a class="button secondary" href="#data-flow">Review the data flow</a>
-        </div>
+        <form class="contact-form" data-email-form data-email-locale="en">
+          <div class="contact-field"><label for="contact-name">Name <span aria-hidden="true">*</span></label><input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name" required></div>
+          <div class="contact-field"><label for="contact-company">Company / organization <span aria-hidden="true">*</span></label><input id="contact-company" name="company" type="text" autocomplete="organization" placeholder="Company or organization" required></div>
+          <div class="contact-field"><label for="contact-phone">Phone</label><input id="contact-phone" name="phone" type="tel" autocomplete="tel" placeholder="+82 10 0000 0000"></div>
+          <div class="contact-field"><label for="contact-email">Email <span aria-hidden="true">*</span></label><input id="contact-email" name="email" type="email" autocomplete="email" placeholder="name@company.com" required></div>
+          <div class="contact-field contact-field-wide">
+            <label for="inquiry-category">Primary inquiry <span aria-hidden="true">*</span></label>
+            <select id="inquiry-category" name="category" data-email-category-select required>
+              <option value="General Technical Consultation">General technical consultation</option>
+              <option value="3D Scanning &amp; Reverse Engineering">3D scanning &amp; reverse engineering</option>
+              <option value="Spatial AI &amp; Quality Inspection">Spatial AI &amp; quality inspection</option>
+              <option value="Physical AI &amp; Robot Data">Physical AI &amp; robot data</option>
+              <option value="Industry-Academic Research">Industry-academic research</option>
+            </select>
+          </div>
+          <fieldset class="contact-options contact-field-wide">
+            <legend>Available data</legend>
+            <div class="contact-chips">
+              <label><input type="checkbox" name="owned-data" value="3D point cloud"><span>3D point cloud</span></label>
+              <label><input type="checkbox" name="owned-data" value="CAD / 3D model"><span>CAD / 3D model</span></label>
+              <label><input type="checkbox" name="owned-data" value="Drawings"><span>Drawings</span></label>
+              <label><input type="checkbox" name="owned-data" value="Photos / video"><span>Photos / video</span></label>
+              <label><input type="checkbox" name="owned-data" value="Inspection criteria"><span>Inspection criteria</span></label>
+              <label><input type="checkbox" name="owned-data" value="Not available yet"><span>Not available yet</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="contact-options contact-field-wide">
+            <legend>Challenges to solve</legend>
+            <div class="contact-chips">
+              <label><input type="checkbox" name="challenge" value="3D scanning / registration"><span>3D scanning / registration</span></label>
+              <label><input type="checkbox" name="challenge" value="Deviation / quality inspection"><span>Deviation / quality inspection</span></label>
+              <label><input type="checkbox" name="challenge" value="Reverse engineering / CAD"><span>Reverse engineering / CAD</span></label>
+              <label><input type="checkbox" name="challenge" value="AI recognition / spatial reasoning"><span>AI recognition / spatial reasoning</span></label>
+              <label><input type="checkbox" name="challenge" value="3D printing / jigs"><span>3D printing / jigs</span></label>
+              <label><input type="checkbox" name="challenge" value="Physical AI / robotics"><span>Physical AI / robotics</span></label>
+            </div>
+          </fieldset>
+          <div class="contact-field contact-field-wide"><label for="contact-details">Project details <span aria-hidden="true">*</span></label><textarea id="contact-details" name="details" rows="7" placeholder="Describe the target asset, field conditions, current issue, expected deliverables, and preferred schedule." required></textarea></div>
+          <div class="contact-nda contact-field-wide"><strong>Optimize3D confidentiality commitment</strong><p>All drawings, original 3D scans, and corporate information are handled as strictly confidential. A formal NDA can be executed before a technical pilot begins.</p></div>
+          <button class="contact-submit contact-field-wide" type="submit">Submit a detailed pilot inquiry</button>
+          <p class="contact-form-note contact-field-wide">Submitting opens a structured email draft. Attach relevant files in your email client.</p>
+        </form>
         <noscript><p class="contact-fallback">Enable JavaScript to use the email inquiry button.</p></noscript>
       </div>
     </section>
@@ -275,6 +303,6 @@
     <div><img src="../assets/brand/optlab-optimize3d-logo-white.png?v=20260708a" alt="OPTLab | Optimize3D" loading="lazy" decoding="async"><span>Point cloud intelligence backed by OPTLab research.</span></div>
   </footer>
 
-  <script src="../assets/js/main.js?v=20260710a"></script>
+  <script src="../assets/js/main.js?v=20260713b"></script>
 </body>
 </html>

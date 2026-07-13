@@ -18,7 +18,7 @@
   <meta property="og:image" content="https://optimize3d.github.io/homepage/assets/images/generated/hero-shipyard-pointcloud-v2.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/css/styles.css?v=20260713d">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20260713e">
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -345,20 +345,66 @@
         <p class="kicker">Contact</p>
         <h2 id="contact-title">보유한 데이터와 해결할 문제를 알려주세요.</h2>
         <p>포인트클라우드, CAD, 사진, 검사 기준, 현장 문제 중 하나만 있어도 적용 범위를 함께 정리할 수 있습니다.</p>
-        <div class="contact-field">
-          <label for="inquiry-category">문의 분야</label>
-          <select id="inquiry-category" data-email-category-select>
-            <option value="일반 기술상담">일반 기술상담</option>
-            <option value="3D 스캐닝·역설계">3D 스캐닝·역설계</option>
-            <option value="공간 AI·품질검사">공간 AI·품질검사</option>
-            <option value="피지컬AI·로봇 데이터">피지컬AI·로봇 데이터</option>
-            <option value="산학공동 연구">산학공동 연구</option>
-          </select>
-        </div>
-        <div class="cta-actions">
-          <button class="button primary" type="button" data-email-button>이메일 문의</button>
-          <a class="button secondary" href="#data-flow">데이터 흐름 다시 보기</a>
-        </div>
+        <form class="contact-form" data-email-form>
+          <div class="contact-field">
+            <label for="contact-name">이름 <span aria-hidden="true">*</span></label>
+            <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="홍길동" required>
+          </div>
+          <div class="contact-field">
+            <label for="contact-company">소속·회사명 <span aria-hidden="true">*</span></label>
+            <input id="contact-company" name="company" type="text" autocomplete="organization" placeholder="회사 또는 기관명" required>
+          </div>
+          <div class="contact-field">
+            <label for="contact-phone">연락처</label>
+            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" placeholder="010-0000-0000">
+          </div>
+          <div class="contact-field">
+            <label for="contact-email">이메일 <span aria-hidden="true">*</span></label>
+            <input id="contact-email" name="email" type="email" autocomplete="email" placeholder="name@company.com" required>
+          </div>
+          <div class="contact-field contact-field-wide">
+            <label for="inquiry-category">상담 대분류 <span aria-hidden="true">*</span></label>
+            <select id="inquiry-category" name="category" data-email-category-select required>
+              <option value="일반 기술상담">일반 기술상담</option>
+              <option value="3D 스캐닝·역설계">3D 스캐닝·역설계</option>
+              <option value="공간 AI·품질검사">공간 AI·품질검사</option>
+              <option value="피지컬AI·로봇 데이터">피지컬AI·로봇 데이터</option>
+              <option value="산학공동 연구">산학공동 연구</option>
+            </select>
+          </div>
+          <fieldset class="contact-options contact-field-wide">
+            <legend>보유 데이터 형태</legend>
+            <div class="contact-chips">
+              <label><input type="checkbox" name="owned-data" value="3D 포인트클라우드"><span>3D 포인트클라우드</span></label>
+              <label><input type="checkbox" name="owned-data" value="CAD·3D 모델"><span>CAD·3D 모델</span></label>
+              <label><input type="checkbox" name="owned-data" value="도면"><span>도면</span></label>
+              <label><input type="checkbox" name="owned-data" value="사진·영상"><span>사진·영상</span></label>
+              <label><input type="checkbox" name="owned-data" value="검사 기준"><span>검사 기준</span></label>
+              <label><input type="checkbox" name="owned-data" value="아직 없음"><span>아직 없음</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="contact-options contact-field-wide">
+            <legend>해결 과제</legend>
+            <div class="contact-chips">
+              <label><input type="checkbox" name="challenge" value="3D 스캐닝·정합"><span>3D 스캐닝·정합</span></label>
+              <label><input type="checkbox" name="challenge" value="편차분석·품질검사"><span>편차분석·품질검사</span></label>
+              <label><input type="checkbox" name="challenge" value="역설계·CAD 재구성"><span>역설계·CAD 재구성</span></label>
+              <label><input type="checkbox" name="challenge" value="AI 객체인식·공간추론"><span>AI 객체인식·공간추론</span></label>
+              <label><input type="checkbox" name="challenge" value="3D 프린팅·지그"><span>3D 프린팅·지그</span></label>
+              <label><input type="checkbox" name="challenge" value="피지컬AI·로봇"><span>피지컬AI·로봇</span></label>
+            </div>
+          </fieldset>
+          <div class="contact-field contact-field-wide">
+            <label for="contact-details">상세 문의 내용 <span aria-hidden="true">*</span></label>
+            <textarea id="contact-details" name="details" rows="7" placeholder="대상 설비·구조물, 현장 조건, 현재 문제, 기대 결과물과 희망 일정을 알려주세요." required></textarea>
+          </div>
+          <div class="contact-nda contact-field-wide">
+            <strong>Optimize3D 보안 서약</strong>
+            <p>💡 제공해주신 모든 도면, 3D 스캔 원본 및 기업 정보는 철저한 대외비로 다루어지며, 필요시 공식 NDA(기밀유지협약) 체결 후 실무 기술 파일럿이 개시됩니다.</p>
+          </div>
+          <button class="contact-submit contact-field-wide" type="submit">상세 파일럿 제안 접수</button>
+          <p class="contact-form-note contact-field-wide">제출하면 입력 내용이 정리된 이메일 초안이 열립니다. 관련 파일은 메일에 첨부해 주세요.</p>
+        </form>
         <noscript><p class="contact-fallback">이메일 문의 버튼은 JavaScript 활성화 후 사용할 수 있습니다.</p></noscript>
       </div>
     </section>
@@ -371,6 +417,6 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=20260710a"></script>
+  <script src="assets/js/main.js?v=20260713b"></script>
 </body>
 </html>

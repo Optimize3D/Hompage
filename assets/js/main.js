@@ -1,7 +1,7 @@
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 const year = document.querySelector("#year");
-const emailButtons = document.querySelectorAll("[data-email-button]");
+const emailForms = document.querySelectorAll("[data-email-form]");
 const pipelines = document.querySelectorAll("[data-pipeline]");
 const tabGroups = document.querySelectorAll("[data-tab-group]");
 const emailCategorySelect = document.querySelector("[data-email-category-select]");
@@ -109,7 +109,7 @@ tabGroups.forEach((group) => {
   if (selected) activateTab(selected);
 });
 
-if (emailButtons.length > 0) {
+if (emailForms.length > 0) {
   const emailCodePoints = [111, 112, 116, 105, 109, 105, 122, 101, 51, 100, 46, 120, 121, 122, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
   const emailAddress = () => String.fromCharCode(...emailCodePoints);
   const inquiryDate = () => {
@@ -123,69 +123,88 @@ if (emailButtons.length > 0) {
 
     return `${part("year")}-${part("month")}-${part("day")}`;
   };
-  const selectedCategory = (locale) => {
-    const selected = emailCategorySelect?.selectedOptions?.[0];
-    if (selected?.value) return selected.value;
-
-    return locale.startsWith("en") ? "General Technical Consultation" : "일반 기술상담";
+  const formValue = (form, name) => {
+    const field = form.elements.namedItem(name);
+    return typeof field?.value === "string" ? field.value.trim() : "";
   };
-  const emailSubject = (button, locale, date, category) => {
+  const checkedValues = (form, name) => [...form.querySelectorAll(`input[name="${name}"]:checked`)]
+    .map((input) => input.value)
+    .filter(Boolean);
+  const emailSubject = (form, locale, date, category, company) => {
     const fallback = locale.startsWith("en") ? "Optimize3D pilot inquiry" : "Optimize3D 파일럿 문의";
-    const baseSubject = button.dataset.emailSubject || fallback;
+    const baseSubject = form.dataset.emailSubject || fallback;
+    const companyLabel = company ? `[${company}]` : "";
 
-    return `[${date}][${category}] ${baseSubject}`;
+    return `[${date}][${category}]${companyLabel} ${baseSubject}`;
   };
-  const emailBody = (locale, date, category) => {
+  const emailBody = (form, locale, date, category) => {
+    const company = formValue(form, "company");
+    const name = formValue(form, "name");
+    const phone = formValue(form, "phone");
+    const email = formValue(form, "email");
+    const details = formValue(form, "details");
+    const data = checkedValues(form, "owned-data");
+    const challenges = checkedValues(form, "challenge");
+
     if (locale.startsWith("en")) {
       return [
         "Hello Optimize3D,",
         "",
-        "I would like to discuss a pilot or technical inquiry.",
-        "Please review the information below.",
+        "I would like to submit the following pilot or technical inquiry.",
         "",
         `Inquiry date: ${date}`,
-        `Inquiry area: ${category}`,
+        `Primary inquiry: ${category}`,
+        `Company / organization: ${company}`,
+        `Name: ${name}`,
+        `Phone: ${phone || "Not provided"}`,
+        `Reply email: ${email}`,
         "",
-        "1. Company / organization:",
-        "2. Name / role:",
-        "3. Contact number:",
-        "4. Target site or object: ship block / cargo hold / mold / piping / jig / robot cell / other",
-        "5. Available data: point cloud / CAD / photos / drawings / inspection criteria",
-        "6. Problem to solve:",
-        "7. Desired deliverables: inspection report / deviation map / scan-to-CAD / AI analysis / jig concept / Physical AI execution data",
-        "8. Schedule or notes:",
+        `Available data: ${data.length ? data.join(" / ") : "Not specified"}`,
+        `Challenges to solve: ${challenges.length ? challenges.join(" / ") : "Not specified"}`,
         "",
-        "If available, I will attach sample data or reference images."
+        "Project details:",
+        details,
+        "",
+        "I will attach relevant sample data or reference files where available.",
+        "I understand that a formal NDA can be executed before the technical pilot begins."
       ].join("\n");
     }
 
     return [
-      "안녕하세요, Optimize3D 파일럿/기술 상담을 문의드립니다.",
-      "아래 항목 중 가능한 내용만 작성합니다.",
+      "안녕하세요, Optimize3D 파일럿/기술 상담을 접수합니다.",
       "",
       `문의일: ${date}`,
-      `문의 분야: ${category}`,
+      `상담 대분류: ${category}`,
+      `회사/기관: ${company}`,
+      `성함: ${name}`,
+      `연락처: ${phone || "미기재"}`,
+      `회신 이메일: ${email}`,
       "",
-      "1. 회사/기관:",
-      "2. 성함/직책:",
-      "3. 연락처:",
-      "4. 적용 현장 또는 대상: 선박블록 / 카고홀드 / 몰드 / 배관 / 지그 / 로봇셀 / 기타",
-      "5. 보유 데이터: 포인트클라우드 / CAD / 사진 / 도면 / 검사 기준",
-      "6. 해결하고 싶은 문제:",
-      "7. 희망 결과물: 검사 리포트 / 편차맵 / 역설계 CAD / AI 분석 / 지그 설계 / 피지컬AI 실행 데이터",
-      "8. 희망 일정 또는 기타:",
+      `보유 데이터: ${data.length ? data.join(" / ") : "선택 안 함"}`,
+      `해결 과제: ${challenges.length ? challenges.join(" / ") : "선택 안 함"}`,
       "",
-      "가능하다면 샘플 데이터나 참고 이미지를 함께 첨부하겠습니다."
+      "상세 문의 내용:",
+      details,
+      "",
+      "가능한 경우 샘플 데이터나 참고 파일을 함께 첨부하겠습니다.",
+      "필요시 공식 NDA 체결 후 실무 기술 파일럿을 진행할 수 있음을 확인했습니다."
     ].join("\n");
   };
 
-  emailButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const locale = button.dataset.emailLocale || document.documentElement.lang || "ko";
+  emailForms.forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const locale = form.dataset.emailLocale || document.documentElement.lang || "ko";
       const date = inquiryDate();
-      const category = selectedCategory(locale);
-      const subject = encodeURIComponent(emailSubject(button, locale, date, category));
-      const body = encodeURIComponent(emailBody(locale, date, category));
+      const category = formValue(form, "category") || (locale.startsWith("en") ? "General Technical Consultation" : "일반 기술상담");
+      const company = formValue(form, "company");
+      const subject = encodeURIComponent(emailSubject(form, locale, date, category, company));
+      const body = encodeURIComponent(emailBody(form, locale, date, category));
       window.location.href = `mailto:${emailAddress()}?subject=${subject}&body=${body}`;
     });
   });
