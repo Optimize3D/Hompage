@@ -252,7 +252,7 @@
             </ul>
           </div>
           <figure class="case-visual">
-            <img src="assets/images/generated/spatial-ai-shipyard-segmentation-v2.png" alt="조선소 포인트클라우드 객체 탐지와 의미론적 분할 시각화" loading="lazy" decoding="async">
+            <img class="is-diagram" src="assets/images/applied/lngc-cargo-hold-ai-detection.jpg" alt="LNGC 화물창 3D 스캔 데이터에서 AI로 구조물을 탐지하고 벽면 평탄도를 검사하는 과정" loading="lazy" decoding="async">
             <figcaption>3D object detection / semantic segmentation / post-processing</figcaption>
           </figure>
         </article>
@@ -260,17 +260,17 @@
           <div class="case-copy">
             <div class="case-summary">
               <time>2026</time>
-              <h3>3차원 포인트 클라우드 기반 객체 탐지와 공간 데이터 후처리 알고리즘을 활용한 선박 블록 지지대 설치 정확도 검사</h3>
-              <p>실제 조선소에서 16개 지점 LiDAR 스캔으로 확보한 선박 블록 하부 포인트클라우드를 의미론적으로 분할하고, 개별 지지대의 중심과 높이를 추출해 기준 배치 대비 설치 편차를 정량 검사했습니다.</p>
+              <h3>선박 블록 지지대 설치 정확도 검사</h3>
+              <p>선박 블록 하부 포인트클라우드에서 지지대를 분할·추출하고, 기준 배치와 비교해 설치 편차를 검사합니다.</p>
             </div>
             <ul class="case-specs">
-              <li><strong>입력</strong><span>선박 블록 하부 16개 지점 3D LiDAR 스캔</span></li>
-              <li><strong>분석</strong><span>PointVector 의미론적 분할, DBSCAN 군집화, RANSAC 형상 추정</span></li>
-              <li><strong>결과</strong><span>개별 지지대 중심·높이 추출 및 설치 편차 정량화</span></li>
+              <li><strong>입력</strong><span>선박 블록 하부 3D LiDAR 스캔</span></li>
+              <li><strong>분석</strong><span>PointVector 분할, DBSCAN·RANSAC 후처리</span></li>
+              <li><strong>결과</strong><span>지지대 위치·높이 및 설치 편차</span></li>
             </ul>
           </div>
           <figure class="case-visual">
-            <img class="is-diagram" src="assets/images/research/ai-shipyard-segmentation.jpg" alt="실제 조선소 포인트클라우드에서 선박 블록 하부 구조와 객체를 의미론적으로 분할한 연구 시각화" loading="lazy" decoding="async">
+            <img class="is-diagram" src="assets/images/applied/ship-block-support-inspection.jpg" alt="선박 블록 하부 포인트클라우드에서 지지대를 분할하고 위치와 이상치를 검사하는 딥러닝 분석 과정" loading="lazy" decoding="async">
             <figcaption>PointVector / DBSCAN / RANSAC / support installation accuracy · <a href="https://doi.org/10.3744/SNAK.2026.63.3.191" target="_blank" rel="noopener noreferrer">대한조선학회 논문 보기</a></figcaption>
           </figure>
         </article>
@@ -288,7 +288,7 @@
             </ul>
           </div>
           <figure class="case-visual">
-            <img class="is-diagram" src="assets/images/research/pointcloud-density-ai.jpg" alt="고밀도와 저밀도 포인트클라우드의 기하 특징과 딥러닝 객체탐지 성능을 비교하는 데이터셋 경량화 연구" loading="lazy" decoding="async">
+            <img class="is-diagram" src="assets/images/applied/shipyard-dataset-lightweighting.jpg" alt="FPFH 기하 특징과 TDA 위상 특징을 결합한 조선소 포인트클라우드 데이터셋 경량화 및 객체 추론 구조" loading="lazy" decoding="async">
             <figcaption>TDA / persistent homology / FPFH / feature augmentation · <a href="https://doi.org/10.3744/SNAK.2025.62.6.373" target="_blank" rel="noopener noreferrer">TDA 논문</a> · <a href="https://doi.org/10.3744/SNAK.2025.62.5.280" target="_blank" rel="noopener noreferrer">FPFH 논문</a></figcaption>
           </figure>
         </article>
